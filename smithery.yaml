@@ -1,0 +1,34 @@
+# Smithery configuration for Poupa AI
+# Schema: https://smithery.ai/docs/build/project-config
+# Remote HTTP MCP — server hosted at https://api.mcp.ai/p_poupa
+
+name: poupa-mcp
+displayName: "Poupa AI"
+description: >
+  Finanças pessoais do Poupa AI. Leia saldo agrupado por banco/categoria/cartão/mês, transações por intervalo e palavra-chave, lista de bancos, cartões e categorias; registre, atualize ou apague transações (uma a uma ou em lote) e movimente entre suas contas. Autentique com a sua API key do Poupa AI.
+
+version: 0.1.0
+license: MIT
+homepage: https://github.com/mcp-dir/poupa-mcp
+repository: https://github.com/mcp-dir/poupa-mcp
+
+tags:
+  - poupa
+  - brazil
+  - financas
+  - vertical
+  - read-write
+
+# Remote HTTP MCP — sem startCommand local (servidor já hospedado)
+startCommand:
+  type: http
+  url: https://api.mcp.ai/p_poupa
+
+auth:
+  type: oauth2
+  resourceMetadataUrl: https://api.mcp.ai/p_poupa/.well-known/oauth-protected-resource
+  fallback:
+    type: agent-auth
+    description: >
+      Para clientes sem OAuth 2.1. O agente expõe uma tool authenticate(token).
+      Usuário gera o JWT em https://app.mcp.ai/agent-auth e cola no chat.
